@@ -1,5 +1,6 @@
 package com.proseca.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,6 @@ public class Finca {
 
     // Relación OneToMany con Animal: Se usa @JsonManagedReference para incluir la lista.
     @OneToMany(mappedBy = "finca", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "finca-animal")
+    //@JsonManagedReference(value = "finca-animal")
     private List<Animal> animales;
 }

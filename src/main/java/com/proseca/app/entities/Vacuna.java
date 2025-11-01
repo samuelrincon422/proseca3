@@ -1,5 +1,6 @@
 package com.proseca.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +24,7 @@ public class Vacuna {
 
     // Se usa @JsonManagedReference para incluir la lista de registros
     @OneToMany(mappedBy = "vacuna", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference(value = "vacuna-registro")
+    @JsonIgnore
+     @JsonManagedReference(value = "vacuna-registro")
     private List<RegistroVacunacion> registros;
 }

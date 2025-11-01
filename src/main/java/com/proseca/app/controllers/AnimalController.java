@@ -2,43 +2,59 @@ package com.proseca.app.controllers;
 
 import com.proseca.app.controllers.api.AnimalApi;
 import com.proseca.app.entities.Animal;
+import com.proseca.app.repositories.interfaces.AnimalRepository;
 import com.proseca.app.services.interfaces.AnimalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+
 
 @RestController
 public class AnimalController implements AnimalApi {
 
-    private final AnimalService service;
-
-    public AnimalController(AnimalService service) {
-        this.service = service;
-    }
+    @Autowired
+    private AnimalRepository animalRepository;
 
     @Override
     public ResponseEntity<Animal> crear(Animal animal) {
-        return new ResponseEntity<>(service.crear(animal), HttpStatus.CREATED);
+        Animal nuevo = animalRepository.save(animal);
+        return ResponseEntity.ok(nuevo);
     }
 
     @Override
     public ResponseEntity<List<Animal>> listarTodos() {
-        return new ResponseEntity<>(service.listarTodos(), HttpStatus.OK);
+        return ResponseEntity.ok(animalRepository.findAll());
     }
 
     @Override
     public ResponseEntity<Animal> obtenerPorId(Integer id) {
-        return new ResponseEntity<>(service.obtenerPorId(id), HttpStatus.OK);
+        return animalRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @Override
     public ResponseEntity<Animal> actualizar(Integer id, Animal animal) {
-        return new ResponseEntity<>(service.actualizar(id, animal), HttpStatus.OK);
+        if (!animalRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        animal.setId(id);
+        return ResponseEntity.ok(animalRepository.save(animal));
     }
 
     @Override
     public ResponseEntity<Void> eliminar(Integer id) {
-        service.eliminar(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (!animalRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        animalRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
+
+
+
+
+

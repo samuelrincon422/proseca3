@@ -22,6 +22,7 @@ public class RegistroVacunacion {
     // al Animal al serializar el RegistroVacunacion. Esto rompe el bucle.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_animal")
+
     @JsonBackReference(value = "animal-vacunacion")
     private Animal animal;
 

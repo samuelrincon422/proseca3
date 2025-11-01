@@ -12,11 +12,11 @@ import java.util.List;
 public interface FincaApi {
 
     @Operation(summary = "Crear una nueva finca")
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/Insertar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Finca> crear(@RequestBody Finca finca);
 
     @Operation(summary = "Listar todas las fincas")
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Finca>> listarTodos();
 
     @Operation(summary = "Obtener una finca por su ID")

@@ -12,12 +12,16 @@ import java.util.List;
 @RequestMapping("/api/animal")
 public interface AnimalApi {
 
+
+
+
+
     @Operation(summary = "Crear un nuevo animal")
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/Insertar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Animal> crear(@RequestBody Animal animal);
 
     @Operation(summary = "Listar todos los animales")
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Animal>> listarTodos();
 
     @Operation(summary = "Obtener un animal por su ID")

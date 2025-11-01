@@ -16,7 +16,7 @@ public interface VacunaApi {
     ResponseEntity<Vacuna> crear(@RequestBody Vacuna vacuna);
 
     @Operation(summary = "Listar todas las vacunas")
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Vacuna>> listarTodos();
 
     @Operation(summary = "Obtener una vacuna por su ID")

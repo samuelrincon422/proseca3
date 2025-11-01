@@ -1,6 +1,7 @@
 package com.proseca.app.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,7 @@ public class Animal {
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
+    //private Integer id_finca;
 
     // Relación ManyToOne con Finca: Se usa @JsonBackReference para evitar el bucle Finca -> Animal.
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,15 +38,18 @@ public class Animal {
 
     // Relación OneToMany con RegistrosVacunacion: Se usa @JsonManagedReference para incluir la lista.
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     @JsonManagedReference(value = "animal-vacunacion")
     private List<RegistroVacunacion> registrosVacunacion;
 
     // AÑADIDO: Listas de otras relaciones OneToMany con @JsonManagedReference para evitar bucles.
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     @JsonManagedReference(value = "animal-reproduccion")
     private List<Reproduccion> registrosReproduccion;
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     @JsonManagedReference(value = "animal-salud")
     private List<EventoDeSalud> eventosDeSalud;
 }
