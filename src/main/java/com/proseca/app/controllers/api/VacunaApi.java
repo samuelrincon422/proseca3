@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name = "Vacuna", description = "Gestión de vacunas")
+@RestController
 @RequestMapping("/api/vacuna")
 public interface VacunaApi {
 

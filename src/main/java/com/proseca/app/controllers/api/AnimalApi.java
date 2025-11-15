@@ -9,11 +9,9 @@ import org.springframework.http.MediaType;
 import java.util.List;
 
 @Tag(name = "Animal", description = "Gestión de animales")
+@RestController
 @RequestMapping("/api/animal")
 public interface AnimalApi {
-
-
-
 
 
     @Operation(summary = "Crear un nuevo animal")

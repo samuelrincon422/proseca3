@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name = "Finca", description = "Gestión de fincas")
+@RestController
 @RequestMapping("/api/finca")
 public interface FincaApi {
 
